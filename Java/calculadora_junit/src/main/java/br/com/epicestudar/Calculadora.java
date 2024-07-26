@@ -20,4 +20,15 @@ public class Calculadora {
         }
         return a / b;
     }
+
+    public int raiz(int a) {
+        if (a < 0) {
+            throw new IllegalArgumentException("Número não pode ser negativo");
+        }
+        return (int) Math.sqrt(a);
+    }
+
+    public int potencia(int a, int b) {
+        return (int) Math.pow(a, b);
+    }
 }

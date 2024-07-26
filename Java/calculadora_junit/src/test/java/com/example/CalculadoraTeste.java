@@ -42,4 +42,19 @@ public class CalculadoraTeste {
     public void testDivisaoPorZero() {
         calc.divisao(3, 0);
     }
+
+    @Test
+    public void testeRaiz() {
+        assertEquals(2, calc.raiz(4));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testeRaizNegativa() {
+        calc.raiz(-4);
+    }
+
+    @Test
+    public void testePotencia() {
+        assertEquals(8, calc.potencia(2, 3));
+    }
 }
