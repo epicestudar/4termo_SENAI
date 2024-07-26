@@ -21,7 +21,7 @@ public class Calculadora {
         return a / b;
     }
 
-    public int raiz(int a) {
+    public int raizQuadrada(int a) {
         if (a < 0) {
             throw new IllegalArgumentException("Número não pode ser negativo");
         }

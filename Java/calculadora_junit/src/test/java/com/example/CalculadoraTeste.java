@@ -44,13 +44,13 @@ public class CalculadoraTeste {
     }
 
     @Test
-    public void testeRaiz() {
-        assertEquals(2, calc.raiz(4));
+    public void testeRaizQuadrada() {
+        assertEquals(2, calc.raizQuadrada(4));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testeRaizNegativa() {
-        calc.raiz(-4);
+    public void testeRaizQuadradaNegativa() {
+        calc.raizQuadrada(-4);
     }
 
     @Test
