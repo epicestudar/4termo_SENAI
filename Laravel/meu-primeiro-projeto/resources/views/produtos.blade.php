@@ -1,10 +1,11 @@
-
 <div>
 @include('components.header')
 </div>
-<div>
-    <h1>Hello World</h1>
+
+<div class="container">
+    <h1>Pagina de Produtos</h1>
 </div>
+
 <div>
     @include('components.footer')
 </div>
