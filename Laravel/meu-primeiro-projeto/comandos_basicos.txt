@@ -1,0 +1,11 @@
+1 - php artisan make:model nomeDoModel - m
+
+2 - configurar o seu arquivo model e depois o migration
+
+3 - php artisan migrate - atualiza seu banco de dados
+
+4 - php artisan make:controller MeuController --resource (o seu controller vem com metodos vazios)
+
+5 - configurar o seu controller
+
+6 - php artisan make:view minha-view
