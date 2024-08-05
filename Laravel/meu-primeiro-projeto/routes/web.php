@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MeuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 
@@ -16,4 +17,6 @@ Route::get('/', function () {
 Route::get('/contato', function () {
     return view('contato');
 });
+
+Route::get('/model', [MeuController::class]);
 
