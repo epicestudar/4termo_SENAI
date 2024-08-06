@@ -31,7 +31,7 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required',
-            'preco' => 'required|decimal'
+            'preco' => 'required|numeric'
         ]);
 
         Produto::create($request->all());

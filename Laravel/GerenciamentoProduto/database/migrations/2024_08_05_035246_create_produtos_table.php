@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('nome');
             $table->text('descricao');
-            $table->decimal('preco', 8, 2);
+            $table->numeric('preco', 8, 2);
             $table->timestamps();
         });
     }
