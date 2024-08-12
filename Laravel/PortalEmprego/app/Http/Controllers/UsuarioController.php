@@ -21,6 +21,8 @@ class UsuarioController extends Controller
     }
 
 
+
+
     // Processar o login do usuário
     public function login(Request $request)
     {
@@ -45,17 +47,17 @@ class UsuarioController extends Controller
     // Exibir o formulário de registro
     public function showRegisterForm()
     {
-        return view('usuarios.register');
+        return view('usuarios.registro');
     }
 
 
     // Processar o registro de um novo usuário
-    public function register(Request $request)
+    public function registro(Request $request)
     {
         $request->validate([
-            'nome' => 'required|text',
-            'email' => 'required|text|email|unique:usuarios',
-            'password' => 'required|text|min:8|confirmed',
+            'nome' => 'required|string',
+            'email' => 'required|string|email|unique:usuarios',
+            'password' => 'required|string|min:4|confirmed',
         ]);
 
 
