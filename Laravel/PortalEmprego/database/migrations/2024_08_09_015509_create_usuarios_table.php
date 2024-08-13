@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('tipo', ['usuario', 'empresa'])->default('usuario');
+            $table->string('cnpj')->nullable();
+            $table->string('nome_empresa')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

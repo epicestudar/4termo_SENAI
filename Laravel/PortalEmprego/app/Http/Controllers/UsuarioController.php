@@ -21,26 +21,27 @@ class UsuarioController extends Controller
     }
 
 
-
-
     // Processar o login do usuário
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+        // Validações para o login
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
 
-        $usuario = Usuario::where('email', $request->email)->first();
-        if($usuario && Hash::check($request->password, $usuario->password)) {
-            session(['usuario_id' => $usuario->id]);
-            return redirect()->route('dashboard');
-        } else{
-            return back()->withErrors([
-                'email' => 'As credenciais não correspondem aos nossos registros.',
-            ]);
+        // Tenta autenticar com o guard 'usuario'
+        if (Auth::guard('usuario')->attempt($credentials)) {
+            $request->session()->regenerate(); // Regenera a sessão para evitar fixação de sessão
+            return redirect()->intended('/dashboard');
         }
+
+
+        // Se falhar, retorna com erro
+        return back()->withErrors([
+            'email' => 'As credenciais não correspondem aos nossos registros.',
+        ])->onlyInput('email');
     }
 
 
@@ -54,21 +55,29 @@ class UsuarioController extends Controller
     // Processar o registro de um novo usuário
     public function registro(Request $request)
     {
-        $request->validate([
-            'nome' => 'required|string',
-            'email' => 'required|string|email|unique:usuarios',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+       // Validações para o registro
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:usuarios',
+        'password' => 'required|string|min:8|confirmed',
+        'tipo' => 'required|in:usuario,empresa',
+       'cnpj' => 'nullable|required_if:tipo,empresa|string',
+        'nome_empresa' => 'nullable|required_if:tipo,empresa|string|max:255'
+    ]);
+
+    // Cria um novo usuário
+    $usuario = Usuario::create([
+        'nome' => $request->nome,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'tipo' => $request->tipo,
+        'cnpj' => $request->tipo === 'empresa' ? $request->cnpj : null,
+        'nome_empresa' => $request->tipo === 'empresa' ? $request->nome_empresa : null
+    ]);
 
 
-        $usuario = Usuario::create([
-            'nome' => $request->nome,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-
-        Auth::login($usuario);
+        // Faz login automático do novo usuário
+        Auth::guard('usuario')->login($usuario);
 
 
         return redirect('/dashboard');
@@ -78,11 +87,12 @@ class UsuarioController extends Controller
     // Realizar o logout do usuário
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('usuario')->logout(); // Logout do guard 'usuario'
+        $request->session()->regenerateToken(); // Regenera o token da sessão
 
 
         $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->regenerate();// Invalida a sessão
 
 
         return redirect('/');
