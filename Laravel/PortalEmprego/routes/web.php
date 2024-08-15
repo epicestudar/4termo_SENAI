@@ -3,7 +3,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
-
+use App\Http\Controllers\VagaController;
+use App\Http\Middleware\VagaMiddleware;
 
 // Rota para exibir o formulário de login
 Route::get('/login', [UsuarioController::class, 'showLoginForm'])->
@@ -38,3 +39,5 @@ name('usuarios.logout');
 Route::get('/dashboard', function () {
     return view('usuarios.dashboard');
 })->middleware('auth')->name('dashboard');
+
+Route::resource('/vagas', VagaController::class)->middleware(VagaMiddleware::class);

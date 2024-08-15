@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('vagas', function (Blueprint $table) {
             $table->id();
-            $table->text('titulo');
+            $table->string('titulo');
             $table->text('descricao');
-            $table->text('localizacao');
-            $table->decimal('salario', 10, 2)->nullable();
-            $table->foreignId('empresa_id')->constrained('empresas')->onDelete('cascade'); // relaciona a vaga com a empresa
+            $table->string('localizacao');
+            $table->decimal('salario', 10, 2);
+            $table->string('empresa'); // relaciona a vaga com a empresa
             $table->timestamps();
         });
     }

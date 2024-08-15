@@ -3,16 +3,26 @@
         <div class="container">
             {{-- <a class="navbar-brand" href="{{ url('/') }}">Portal de Empregos</a> --}}
             @if (Auth::check())
-                @if (request()->user()->where('tipo', 'empresa')->first())
-                    <div>
-                        Olá empresa
-                    </div>
-                @else
-                    <div>
-                        Olá usuario
-                    </div>
+                @if (Auth::user()->isEmpresa())
+                <div>
+                    <a href="/vagas">Acesse dashboard de vagas</a>
+                </div>
                 @endif
-
+                <div>
+                    <h3>Olá, {{ Auth::user()->nome }}</h3>
+                </div>
+                <div>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <input type="submit" value="Sair">
+                    </form>
+                </div>
+                {{-- @endif --}}
+                @else
+                <div class="nav-bar">
+                    <a href="/login"><h2>Login</h2></a>
+                    <a href="/registro"><h2>Registre-se</h2></a>
+                </div>
             @endif
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

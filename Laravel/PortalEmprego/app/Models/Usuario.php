@@ -22,4 +22,12 @@ class Usuario extends Authenticatable
         return $this->hasMany(Inscricao::class);
     }
 
+    public function isUsuario() {
+        return $this->tipo === 'usuario';
+    }
+
+    public function isEmpresa() {
+        return $this->tipo === 'empresa';
+    }
+
 }
