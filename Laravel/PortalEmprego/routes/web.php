@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InscricaoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
@@ -34,8 +36,10 @@ name('usuarios.logout');
 
 
 // Rota para o dashboard, protegida por autenticação
-Route::get('/dashboard', function () {
-    return view('usuarios.dashboard');
-})->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
-Route::resource('/vagas', VagaController::class)->middleware(VagaMiddleware::class);
+Route::resource('/vagas', VagaController::class)->middleware(VagaMiddleware::class)->except('show');
+
+Route::get('vagas/{vaga}', [VagaController::class, 'show'])->middleware('auth')->name('vagas.show');
+
+Route::post('inscricao/add/{vaga}', [InscricaoController::class, 'add'])->middleware('auth')->name('inscricao.add');
