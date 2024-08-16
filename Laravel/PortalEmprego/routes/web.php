@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
@@ -10,9 +10,7 @@ use App\Http\Middleware\VagaMiddleware;
 Route::get('/login', [UsuarioController::class, 'showLoginForm'])->
 name('usuarios.login.form');
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('', [HomeController::class, 'index'])->name('home');
 
 
 // Rota para processar o login

@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            {{-- <a class="navbar-brand" href="{{ url('/') }}">Portal de Empregos</a> --}}
+            {{-- <a class="navbar-brand" href="{{ url('') }}">Portal de Empregos</a> --}}
             @if (Auth::check())
                 @if (Auth::user()->isEmpresa())
                 <div>
