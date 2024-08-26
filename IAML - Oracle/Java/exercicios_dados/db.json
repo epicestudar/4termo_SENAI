@@ -1,0 +1,9 @@
+{
+    "users": [
+      { "id": 1, "name": "João", "age": 30, "city": "São Paulo" },
+      { "id": 2, "name": "Maria", "age": 25, "city": "Rio de Janeiro" },
+      { "id": 3, "name": "Carlos", "age": 35, "city": "Belo Horizonte" },
+      { "id": 4, "name": "Ana", "age": 28, "city": "Curitiba" }
+    ]
+  }
+  
