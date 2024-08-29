@@ -19,9 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Exercicios {
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres"; // Mova a URL para um nível de classe
-    private static final String USER = "postgres"; // Substitua com seu usuário do PostgreSQL
-    private static final String PASSWORD = "postgres"; // Substitua com sua senha do PostgreSQL
+    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String USER = "postgres"; 
+    private static final String PASSWORD = "postgres"; 
 
     public void exercicio1() {
         String arquivo = "notas.txt";
@@ -37,13 +37,21 @@ public class Exercicios {
 
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
+                if(dados.length < 2) {
+                    System.out.println("Linha com formato incorreto: " + linha);
+                    continue;
+                }
 
                 String nome = dados[0];
                 double somaNotas = 0;
                 int quantidadeNotas = dados.length - 1;
 
-                for (int i = 1; i <= quantidadeNotas; i++) {
-                    somaNotas += Double.parseDouble(dados[i]);
+                try {
+                    for (int i = 1; i <= quantidadeNotas; i++) {
+                        somaNotas += Double.parseDouble(dados[i]);
+                    }
+                } catch (NumberFormatException e) {
+                    somaNotas += 0;
                 }
 
                 double media = somaNotas / quantidadeNotas;
@@ -123,8 +131,8 @@ public class Exercicios {
 
     public void exercicio3() {
         String url = "jdbc:postgresql://localhost:5432/postgres";
-        String user = "postgres"; // substitua com seu usuário do PostgreSQL
-        String password = "postgres"; // substitua com sua senha do PostgreSQL
+        String user = "postgres"; 
+        String password = "postgres"; 
 
         try (Connection con = DriverManager.getConnection(url, user, password);
                 Statement stmt = con.createStatement()) {
@@ -195,7 +203,7 @@ public class Exercicios {
 
                 double valorTotalEstoque = quantidade * preco;
 
-                // Verifica se é o maior valor total de estoque encontrado
+                
                 if (valorTotalEstoque > maiorValorEstoque) {
                     maiorValorEstoque = valorTotalEstoque;
                     linhaComMaiorValorEstoque = linha + "," + valorTotalEstoque;
@@ -229,7 +237,7 @@ public class Exercicios {
                 System.out.println("5. Sair");
 
                 int opcao = scanner.nextInt();
-                scanner.nextLine();  // Consumir a nova linha
+                scanner.nextLine();  
 
                 switch (opcao) {
                     case 1:
@@ -247,7 +255,7 @@ public class Exercicios {
                     case 3:
                         System.out.print("Digite o ID do cliente: ");
                         int idAtualizar = scanner.nextInt();
-                        scanner.nextLine();  // Consumir a nova linha
+                        scanner.nextLine(); 
                         System.out.print("Digite o novo e-mail do cliente: ");
                         String novoEmail = scanner.nextLine();
                         atualizarEmailCliente(con, idAtualizar, novoEmail);

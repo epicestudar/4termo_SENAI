@@ -1,5 +1,6 @@
 import React from "react";
 import Livros from "./pages/Livro";
+import "./App.css";
 
 function App() {
   return (
