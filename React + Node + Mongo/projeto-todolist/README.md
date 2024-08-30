@@ -1,3 +1,20 @@
+<br>
+<br>
+<br>
+<p align="center">
+   <img src="/projeto/src/assets/logo/logo.png" alt="logo" width=250px>
+</p>
+
+<p align="center">
+   <img src="https://img.shields.io/badge/Backend-PRODUZINDO-red?style=for-the-badge" alt="backend" />
+  <img src="https://img.shields.io/badge/Documentação-FEITO-blue?style=for-the-badge" alt="documentação" />
+  <img src="https://img.shields.io/badge/Testes-PRODUZINDO-red?style=for-the-badge" alt="mobile" />
+  <img src="https://img.shields.io/badge/Frontend-PRODUZINDO-red?style=for-the-badge" alt="site" />
+</p>
+<hr>
+<br>
+<br><br><br>
+
 # Avaliação Formativa Node.js e React
 ## Apresentação do Projeto: Desenvolvimento de Aplicação To-Do List
 
