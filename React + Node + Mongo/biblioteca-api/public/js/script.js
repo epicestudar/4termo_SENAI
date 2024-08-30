@@ -1,66 +1,89 @@
-// URL da API (substitua pela URL correta se necessário)
 const apiUrl = "http://localhost:3000/livros";
 
-// Função para buscar os livros na API e renderizar na tabela
+// Carregar livros ao abrir a página
+window.onload = function () {
+  if (window.location.pathname.includes("index.html")) {
+    buscarLivros();
+  }
+  if (window.location.pathname.includes("update.html")) {
+    preencherFormularioAtualizacao();
+  }
+};
+
+// Buscar e renderizar livros
 function buscarLivros() {
   fetch(apiUrl)
-    .then((response) => response.json()) // Converte a resposta para JSON
+    .then((response) => response.json())
     .then((livros) => {
       const tabelaCorpo = document.getElementById("livrosCorpo");
-      tabelaCorpo.innerHTML = ""; // Limpa a tabela antes de renderizar
-
-      // Itera sobre os livros e cria uma linha para cada um
+      tabelaCorpo.innerHTML = "";
       livros.forEach((livro) => {
         const linha = document.createElement("tr");
-
-        // Cria as células da linha
-        const idCelula = document.createElement("td");
-        idCelula.textContent = livro._id; // Ou livro.id_livro dependendo da estrutura
-
-        const tituloCelula = document.createElement("td");
-        tituloCelula.textContent = livro.titulo;
-
-        const autorCelula = document.createElement("td");
-        autorCelula.textContent = livro.autor;
-
-        const anoCelula = document.createElement("td");
-        anoCelula.textContent = livro.ano;
-
-        const generoCelula = document.createElement("td");
-        generoCelula.textContent = livro.genero;
-
-        //Adicionar botões de ação na célula
-        const acoesCelula = document.createElement("td");
-        const updateButton = document.createElement("a");
-        updateButton.textContent = "Atualizar";
-        updateButton.classList.add("button");
-        updateButton.href = `update.html?id=${livro._id}`;
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Deletar";
-        deleteButton.classList.add("delete");
-        deleteButton.onclick = () => deletarLivro(livro._id);
-
-        acoesCelula.appendChild(updateButton);
-        acoesCelula.appendChild(deleteButton);
-
-        // Adiciona as células na linha
-        linha.appendChild(idCelula);
-        linha.appendChild(tituloCelula);
-        linha.appendChild(autorCelula);
-        linha.appendChild(anoCelula);
-        linha.appendChild(generoCelula);
-        linha.appendChild(acoesCelula);
-
-        // Adiciona a linha na tabela
+        linha.innerHTML = `
+          <td>${livro._id}</td>
+          <td>${livro.titulo}</td>
+          <td>${livro.autor}</td>
+          <td>${livro.ano}</td>
+          <td>${livro.genero}</td>
+          <td>
+            <a href="update.html?id=${livro._id}" class="button">Atualizar</a>
+            <button class="delete" onclick="deletarLivro('${livro._id}')">Deletar</button>
+          </td>`;
         tabelaCorpo.appendChild(linha);
       });
     })
-    .catch((error) => console.error("Erro ao buscar livros:", error)); // Loga um erro em caso de falha
+    .catch((error) => console.error("Erro ao buscar livros:", error));
 }
 
-// Chama a função para buscar e renderizar os livros ao carregar a página
-window.onload = buscarLivros;
+// Deletar livro
+function deletarLivro(id) {
+  fetch(`${apiUrl}/${id}`, { method: "DELETE" })
+    .then(() => buscarLivros())
+    .catch((error) => console.error("Erro ao deletar livro:", error));
+}
+
+// Preencher formulário de atualização
+function preencherFormularioAtualizacao() {
+  const id = new URLSearchParams(window.location.search).get("id");
+  if (id) {
+    fetch(`${apiUrl}/${id}`)
+      .then((response) => response.json())
+      .then((livro) => {
+        document.getElementById("livroId").value = livro._id;
+        document.getElementById("titulo").value = livro.titulo;
+        document.getElementById("autor").value = livro.autor;
+        document.getElementById("ano").value = livro.ano;
+        document.getElementById("genero").value = livro.genero;
+      })
+      .catch((error) => console.error("Erro ao buscar livro:", error));
+  }
+}
+
+// Adicionar evento de submissão do formulário de atualização
+document
+  .getElementById("livroUP")
+  ?.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const id = document.getElementById("livroId").value;
+    const livro = {
+      titulo: document.getElementById("titulo").value,
+      autor: document.getElementById("autor").value,
+      ano: document.getElementById("ano").value,
+      genero: document.getElementById("genero").value,
+    };
+    atualizarLivro(id, livro);
+  });
+
+// Atualizar livro
+function atualizarLivro(id, livro) {
+  fetch(`${apiUrl}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(livro),
+  })
+    .then(() => (window.location.href = "index.html"))
+    .catch((error) => console.error("Erro ao atualizar livro:", error));
+}
 
 // Função para adicionar um novo livro
 function adicionarLivro(livro) {
@@ -88,18 +111,3 @@ document
     const livro = { titulo, autor, ano, genero };
     adicionarLivro(livro);
   });
-
-// Preenche o formulário de atualização com os dados do livro existente
-if (window.location.pathname.includes("update.html")) {
-  const id = new URLSearchParams(window.location.search).get("id");
-  fetch(`${apiUrl}/${id}`)
-    .then((response) => response.json())
-    .then((livro) => {
-      document.getElementById("livroId").value = livro._id;
-      document.getElementById("titulo").value = livro.titulo;
-      document.getElementById("autor").value = livro.autor;
-      document.getElementById("ano").value = livro.ano;
-      document.getElementById("genero").value = livro.genero;
-    })
-    .catch((error) => console.error("Erro ao buscar livro:", error));
-}

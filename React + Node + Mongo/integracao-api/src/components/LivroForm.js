@@ -1,56 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const LivroForm = ({ livroAtual, onSave }) => {
-  const [livro, setLivro] = useState(
-    livroAtual || { titulo: "", autor: "", ano: "", genero: "" }
-  );
+const LivroForm = () => {
+  const { id } = useParams();
+  const [livro, setLivro] = useState({
+    titulo: "",
+    autor: "",
+    ano: "",
+    genero: "",
+  });
+  const navigate = useNavigate();
+  const [editando, setEditando] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLivro({ ...livro, [name]: value });
-  };
+  useEffect(() => {
+    if (id) {
+      setEditando(true);
+      axios
+        .get(`http://localhost:3000/livros/${id}`)
+        .then((response) => setLivro(response.data))
+        .catch((error) => console.error("Erro ao buscar livro:", error));
+    }
+  }, [id]);
 
-  const handleSubmit = (e) => {
+  const salvarLivro = async (e) => {
     e.preventDefault();
-    const request = livro._id ? axios.put : axios.post;
-    const url = livro._id
-      ? `http://localhost:3000/livros/${livro._id}`
-      : "http://localhost:3000/livros";
-
-    request(url, livro)
-      .then((response) => onSave(response.data))
-      .catch((error) => console.error("Erro ao salvar livro:", error));
+    try {
+      if (editando) {
+        await axios.put(`http://localhost:3000/livros/${id}`, livro);
+      } else {
+        await axios.post("http://localhost:3000/livros", livro);
+      }
+      navigate("/");
+    } catch (error) {
+      console.error("Erro ao salvar livro", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="titulo"
-        value={livro.titulo}
-        onChange={handleChange}
-        placeholder="Título"
-      />
-      <input
-        name="autor"
-        value={livro.autor}
-        onChange={handleChange}
-        placeholder="Autor"
-      />
-      <input
-        name="ano"
-        value={livro.ano}
-        onChange={handleChange}
-        placeholder="Ano"
-      />
-      <input
-        name="genero"
-        value={livro.genero}
-        onChange={handleChange}
-        placeholder="Gênero"
-      />
-      <button type="submit">Salvar</button>
-    </form>
+    <div>
+      <h1>{editando ? "Editar Livro" : "Adicionar Novo Livro"}</h1>
+      <form onSubmit={salvarLivro}>
+        <input
+          type="text"
+          placeholder="Título"
+          value={livro.titulo}
+          onChange={(e) => setLivro({ ...livro, titulo: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Autor"
+          value={livro.autor}
+          onChange={(e) => setLivro({ ...livro, autor: e.target.value })}
+        />
+        <input
+          type="number"
+          placeholder="Ano"
+          value={livro.ano}
+          onChange={(e) => setLivro({ ...livro, ano: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Gênero"
+          value={livro.genero}
+          onChange={(e) => setLivro({ ...livro, genero: e.target.value })}
+        />
+        <button type="submit">
+          {editando ? "Salvar Alterações" : "Adicionar Livro"}
+        </button>
+      </form>
+    </div>
   );
 };
 

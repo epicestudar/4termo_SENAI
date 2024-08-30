@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import LivroCard from "./LivroCard";
 
-const LivroList = () => {
-  const [livros, setLivros] = useState([]);
+const LivroList = ({ livros, setLivros }) => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/livros")
-      .then((response) => setLivros(response.data))
-      .catch((error) => console.error("Erro ao buscar livros:", error));
-  }, []);
+  const deletarLivro = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/livros/${id}`);
+      setLivros(livros.filter((livro) => livro._id !== id));
+    } catch (error) {
+      console.error("Erro ao deletar livro", error);
+    }
+  };
 
   return (
-    <div className="livro-list">
+    <ul>
       {livros.map((livro) => (
-        <LivroCard key={livro._id} livro={livro} />
+        <li key={livro._id}>
+          {livro.titulo} - {livro.autor} ({livro.ano}) - {livro.genero}
+          <button onClick={() => navigate(`/editar-livro/${livro._id}`)}>
+            Editar
+          </button>
+          <button onClick={() => deletarLivro(livro._id)}>Deletar</button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
