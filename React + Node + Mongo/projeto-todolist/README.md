@@ -15,10 +15,8 @@
 <br>
 <br><br><br>
 
-# Avaliação Formativa Node.js e React
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Avaliação Formativa Node e React" alt="Typing SVG" /></a>
 ## Apresentação do Projeto: Desenvolvimento de Aplicação To-Do List
-
-**Bem-vindos ao Projeto de Desenvolvimento de Aplicação To-Do List!**
 
 ### Visão Geral do Projeto
 **Objetivo:**
