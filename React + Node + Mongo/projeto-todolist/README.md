@@ -200,3 +200,18 @@ flowchart TD
     I --> P[Selecionar Tarefa para Excluir]
     P --> Q[Confirmar Exclusão]
     Q --> D
+```
+<br><br><br><br><br>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Identidade Visual" alt="Typing SVG" /></a>
+
+<p align="left">
+   <img src="Docs/imgs/briefing.webp" width="400px" alt="Briefing Image" />
+</p>
+
+
+**- `Fontes` do Nosso Projeto:**
+**• Kanit**
+**• Inter**
+**• Poppins**
+**• Roboto**
