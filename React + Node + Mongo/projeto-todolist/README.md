@@ -16,6 +16,7 @@
 <br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Avaliação Formativa Node e React" alt="Typing SVG" /></a>
+
 ## Apresentação do Projeto: Desenvolvimento de Aplicação To-Do List
 
 ### Visão Geral do Projeto
@@ -26,10 +27,12 @@ Desenvolver uma aplicação web de To-Do List utilizando tecnologias modernas e 
 A Escola SENAI, que busca criar soluções educacionais para a população, precisa de uma aplicação de To-Do List bem desenvolvida que possa ser utilizada por seus colaboradores, ajudando os usuários a organizar suas tarefas de forma eficiente e segura. Estamos contratando você para nos ajudar a construir essa aplicação.
 <br><br><br><br><br>
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Escopo" alt="Typing SVG" /></a>
+
 A aplicação To-Do List será desenvolvida utilizando Node.js para o backend e React para o frontend, com MongoDB como banco de dados e JWT para autenticação. A solução visa proporcionar uma experiência de usuário intuitiva, com recursos para criação, visualização, atualização e exclusão de tarefas.
 <br><br><br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Objetivos SMART" alt="Typing SVG" /></a>
+
 - **Específicos:**
   1. Implementar um sistema de autenticação de usuários utilizando JWT até o final da terceira semana.
   2. Desenvolver a interface de usuário em React, permitindo a criação e gerenciamento de tarefas, até o final da quinta semana.
@@ -44,17 +47,36 @@ A aplicação To-Do List será desenvolvida utilizando Node.js para o backend e 
  <br><br><br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Cronograma" alt="Typing SVG" /></a>
-O projeto será desenvolvido ao longo de 6 semanas, distribuídas da seguinte forma:
-- **Semana 1:** Análise de requisitos e definição do escopo do projeto.
-- **Semana 2:** Desenvolvimento da API RESTful em Node.js para operações CRUD.
-- **Semana 3:** Implementação do sistema de autenticação com JWT.
-- **Semana 4:** Configuração e integração do MongoDB para armazenamento de dados.
-- **Semana 5:** Desenvolvimento da interface de usuário em React.
-- **Semana 6:** Testes, otimizações e ajustes finais para garantir a estabilidade e usabilidade da aplicação.
 
+```mermaid
+gantt
+    title Cronograma do Projeto To-Do List
+    dateFormat  YYYY-MM-DD
+    excludes    weekends
+
+    section Análise e Planejamento
+    Análise de Requisitos e Definição do Escopo :a1, 2024-09-01, 7d
+
+    section Desenvolvimento da API
+    Desenvolvimento da API RESTful em Node.js :a2, 2024-09-08, 7d
+
+    section Implementação de Autenticação
+    Implementação do Sistema de Autenticação com JWT :a3, 2024-09-15, 7d
+
+    section Configuração do Banco de Dados
+    Configuração e Integração do MongoDB :a4, 2024-09-22, 7d
+
+    section Desenvolvimento da Interface
+    Desenvolvimento da Interface de Usuário em React :a5, 2024-09-29, 7d
+
+    section Testes e Ajustes
+    Testes, Otimizações e Ajustes Finais :a6, 2024-10-06, 7d
+
+```
 <br><br><br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Análises de Risco" alt="Typing SVG" /></a>
+
 1. **Atrasos no Desenvolvimento:** O tempo limitado pode levar a atrasos na entrega das funcionalidades, impactando o cronograma geral do projeto.
 2. **Desafios de Integração:** A integração entre o backend e frontend pode apresentar dificuldades, especialmente na implementação do sistema de autenticação.
 3. **Segurança dos Dados:** Existe o risco de vulnerabilidades relacionadas à autenticação e proteção de dados, o que requer medidas de segurança rigorosas.
@@ -62,6 +84,7 @@ O projeto será desenvolvido ao longo de 6 semanas, distribuídas da seguinte fo
 <br><br><br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Recursos" alt="Typing SVG"/></a>
+
 **Equipe:**
 - 1 Gerente de Projetos
 - 2 Desenvolvedores Full-Stack (Node.js e React)
@@ -88,6 +111,7 @@ O projeto será desenvolvido ao longo de 6 semanas, distribuídas da seguinte fo
 ```mermaid
 classDiagram
     class Usuario {
+        +Integer id
         +String nome
         +String email
         +String senha
@@ -96,6 +120,7 @@ classDiagram
     }
 
     class Tarefa {
+        +Integer id
         +String titulo
         +String descricao
         +Date prazoMaximo
@@ -103,38 +128,75 @@ classDiagram
         +marcarComoCompletada()
     }
 
-    class Auth {
-        +String token
-        +String generateToken()
-        +Boolean verifyToken()
+    class Grupo {
+       +Integer id
+       +String nome
+       +adicionarUsuario()
+       +editarUsuario()
+       +atualizarUsuario()
+       +deletarUsuario()
     }
 
-    class TarefaController {
-        +criarTarefa()
-        +deletarTarefa()
-        +atualizarTarefa()
-        +visualizarTarefas()
-    }
-
-    class UsuarioController {
-        +criarUsuario()
-        +loginUsuario()
-        +visualizarTarefasUsuario()
-    }
-
-    class Database {
-        +connect()
-        +disconnect()
-        +query()
+    class Administrador {
+       +Integer id
+       +String nome
+       +String email
+       +String senha
     }
 
     Usuario "1" --> "muitas" Tarefa : possui
-    UsuarioController --> Usuario : gerencia
-    TarefaController --> Tarefa : controla
-    Auth --> Usuario : autenticação
-    TarefaController --> Database : interage com
-    UsuarioController --> Database : interage com
-    Database --> MongoDB : usa
+    Administrador --> Grupo : gerencia
+    Grupo --> Usuario : gerencia
+    Usuario --> Tarefa : controla
+    Grupo --> Usuario : interage com
+    Usuario --> Tarefa : faz
+```
 <br><br><br><br><br>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Diagrama de Uso" alt="Typing SVG" /></a>
+```mermaid
+flowchart TD
+    A[Administrador] -->|Gerenciar Grupos| B(Gerenciar Grupos)
+    B -->|Adicionar Membros| C(Adicionar Membros ao Grupo)
+    B -->|Remover Membros| D(Remover Membros do Grupo)
+    A -->|Excluir Tarefas| E(Excluir Tarefas)
+    A -->|Gerenciar Tarefas| F(Gerenciar Tarefas)
+    
+    G[Grupo] -->|Visualizar Tarefas| H(Visualizar Tarefas)
+    J[Usuário] -->|Editar Tarefas| I(Editar Tarefas)
+    I -->|Marcar como Concluída| J1(Marcar Tarefas como Concluídas)
+    J -->|Criar Tarefas| K(Criar Tarefas)
+    
+    L[Usuário] -->|Registrar-se| M(Registrar-se)
+    M -->|Fazer Login| N(Fazer Login)
+```
+<br><br><br><br><br>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Diagrama de Fluxo" alt="Typing SVG" /></a>
+```mermaid
+flowchart TD
+    A[Início] --> B[Login/Registro]
+    B --> C{Usuário Existente?}
+    C -->|Sim| D[Dashboard]
+    C -->|Não| E[Cadastrar Novo Usuário]
+    E --> B
+
+    D --> F[Visualizar Tarefas]
+    D --> G[Criar Tarefa]
+    D --> H[Editar Tarefa]
+    D --> I[Excluir Tarefa]
+
+    F --> J{Tarefas Concluídas?}
+    J -->|Sim| K[Exibir Tarefas Concluídas]
+    J -->|Não| L[Exibir Tarefas Pendentes]
+
+    G --> M[Adicionar Detalhes da Tarefa]
+    M --> D
+
+    H --> N[Selecionar Tarefa para Editar]
+    N --> O[Alterar Detalhes da Tarefa]
+    O --> D
+
+    I --> P[Selecionar Tarefa para Excluir]
+    P --> Q[Confirmar Exclusão]
+    Q --> D
