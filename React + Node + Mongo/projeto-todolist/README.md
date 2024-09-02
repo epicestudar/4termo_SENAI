@@ -135,3 +135,6 @@ classDiagram
     TarefaController --> Database : interage com
     UsuarioController --> Database : interage com
     Database --> MongoDB : usa
+<br><br><br><br><br>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Diagrama de Uso" alt="Typing SVG" /></a>
