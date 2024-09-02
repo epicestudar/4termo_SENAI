@@ -6,9 +6,9 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/Backend-PRODUZINDO-red?style=for-the-badge" alt="backend" />
+   <img src="https://img.shields.io/badge/API-PRODUZINDO-red?style=for-the-badge" alt="backend" />
   <img src="https://img.shields.io/badge/Documentação-FEITO-blue?style=for-the-badge" alt="documentação" />
-  <img src="https://img.shields.io/badge/Testes-PRODUZINDO-red?style=for-the-badge" alt="mobile" />
+  <img src="https://img.shields.io/badge/Protótipos-PRODUZINDO-red?style=for-the-badge" alt="mobile" />
   <img src="https://img.shields.io/badge/Frontend-PRODUZINDO-red?style=for-the-badge" alt="site" />
 </p>
 <hr>
