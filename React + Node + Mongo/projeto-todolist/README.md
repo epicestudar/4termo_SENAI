@@ -80,3 +80,58 @@ O projeto será desenvolvido ao longo de 6 semanas, distribuídas da seguinte fo
 - Trello para gerenciamento de tarefas
 - Slack para comunicação interna
 - Figma para design de interfaces
+
+<br><br><br><br><br>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Diagrama de Classe" alt="Typing SVG" /></a>
+
+```mermaid
+classDiagram
+    class Usuario {
+        +String nome
+        +String email
+        +String senha
+        +login()
+        +cadastro()
+    }
+
+    class Tarefa {
+        +String titulo
+        +String descricao
+        +Date prazoMaximo
+        +Boolean tarefaFeita
+        +marcarComoCompletada()
+    }
+
+    class Auth {
+        +String token
+        +String generateToken()
+        +Boolean verifyToken()
+    }
+
+    class TarefaController {
+        +criarTarefa()
+        +deletarTarefa()
+        +atualizarTarefa()
+        +visualizarTarefas()
+    }
+
+    class UsuarioController {
+        +criarUsuario()
+        +loginUsuario()
+        +visualizarTarefasUsuario()
+    }
+
+    class Database {
+        +connect()
+        +disconnect()
+        +query()
+    }
+
+    Usuario "1" --> "muitas" Tarefa : possui
+    UsuarioController --> Usuario : gerencia
+    TarefaController --> Tarefa : controla
+    Auth --> Usuario : autenticação
+    TarefaController --> Database : interage com
+    UsuarioController --> Database : interage com
+    Database --> MongoDB : usa
