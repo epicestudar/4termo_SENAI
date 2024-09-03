@@ -1,5 +1,5 @@
 import connectMongo from "@/utils/mongodb";
-import Todo from "@/models/ToDo";
+import Todo from "@/models/Todo";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -8,7 +8,10 @@ export async function GET() {
     const todos = await Todo.find({});
     return NextResponse.json({ success: true, data: todos });
   } catch (error) {
-    return NextResponse.json({ success: false }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 400 }
+    );
   }
 }
 
