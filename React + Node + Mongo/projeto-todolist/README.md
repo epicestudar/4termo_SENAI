@@ -206,12 +206,23 @@ flowchart TD
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Identidade Visual" alt="Typing SVG" /></a>
 
 <p align="left">
-   <img src="Docs/imgs/briefing.webp" width="400px" alt="Briefing Image" />
-</p>
 
+**- `Paleta` de Cores:**
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=E60D0DFF&repeat=false&random=false&width=435&lines=E60D0DFF)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=12EE7EFF&repeat=false&random=false&width=435&lines=12EE7EFF)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FBFF49FF&repeat=false&random=false&width=435&lines=FBFF49FF)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FCFFF4FF&repeat=false&random=false&width=435&lines=FCFFF4FF)](https://git.io/typing-svg)
 
 **- `Fontes` do Nosso Projeto:**
+
 **• Kanit**
+
 **• Inter**
+
 **• Poppins**
+
 **• Roboto**
+</p>
+<br><br><br><br><br>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=440&size=22&pause=1000&color=38F77CFF&center=false&vCenter=false&repeat=false&width=435&lines=Protótipos" alt="Typing SVG" /></a>
