@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -22,7 +23,6 @@ export default function Home() {
       console.error("Erro ao buscar todos:", error);
     }
   };
-
 
   const addTodo = async () => {
     const response = await fetch("/api/todos", {
@@ -48,29 +48,42 @@ export default function Home() {
     const response = await fetch(`/api/todos/${id}`, {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({completed:!status}),
+      body: JSON.stringify({ completed: !status }),
     });
     await response.json();
     fetchTodos();
-  }
+  };
 
   return (
-    <div>
-      <h1>To-Do List</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>To-Do List</h1>
       <input
         type="text"
+        className={styles.inputText}
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={addTodo}>Adicionar Tarefa</button>
-      <ul>
+      <button className={styles.button} onClick={addTodo}>
+        Adicionar Tarefa
+      </button>
+      <ul className={styles.list}>
         {todos.map((todo) => (
-          <li key={todo._id}>
-            {todo.title} - {todo.completed?"Concluído":"Pendente"}
-            <input type="checkbox" checked={todo.completed} onChange={() => updateTodo(todo._id, todo.completed)}/>
-            <button onClick={() => deleteTodo(todo._id)}>Excluir</button>
+          <li className={styles.listItem} key={todo._id}>
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              checked={todo.completed}
+              onChange={() => updateTodo(todo._id, todo.completed)}
+            />
+            {todo.title} - {todo.completed ? "Concluído" : "Pendente"}
+            <button
+              className={styles.deleteButton}
+              onClick={() => deleteTodo(todo._id)}
+            >
+              Excluir
+            </button>
           </li>
         ))}
       </ul>
