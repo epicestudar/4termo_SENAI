@@ -12,10 +12,14 @@ import lombok.Setter;
 public class Professor extends Pessoa{
     private double salario;
 
+   public Professor(String nome, String email, String cpf, double salario) {
+    super(nome, email, cpf);
+    this.salario = salario;
+   }
 
-
-    @Override
-    void exibirInformacoes() {
-        System.out.println("Informações: ");
-    }
+   @Override
+   public String exibirInformacoes() {
+    super.exibirInformacoes();
+    return "Salário: " + salario;
+   }
 }

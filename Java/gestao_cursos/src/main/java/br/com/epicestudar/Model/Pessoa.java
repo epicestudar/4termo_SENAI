@@ -14,5 +14,7 @@ public abstract class Pessoa {
     private String email;
     private String cpf;
 
-    void exibirInformacoes(){}
+    public String exibirInformacoes() {
+        return "Nome: " + nome + ", Email: " + email + ", CPF: " + cpf;
+    }
 }
