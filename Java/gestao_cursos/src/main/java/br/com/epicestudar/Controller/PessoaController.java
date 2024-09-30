@@ -3,7 +3,6 @@ package br.com.epicestudar.Controller;
 import java.util.*;
 
 import br.com.epicestudar.Model.Aluno;
-import br.com.epicestudar.Model.Pessoa;
 import br.com.epicestudar.Model.Professor;
 import javax.swing.JOptionPane;
 
@@ -16,39 +15,12 @@ public class PessoaController {
         professores = new ArrayList<>();
     }
 
-    public void addPessoa(Professor professor, Aluno aluno) {
-        int operacao = 0;
-        do {
-            try {
-                operacao = Integer.parseInt(JOptionPane.showInputDialog(
-                        "\n" + "1. Cadastrar Aluno \n" + "2. Cadastrar Professor \n" + "3. Sair"));
-            } catch (Exception e) {
-                System.err.println(e);
-                operacao = 0;
-            }
+    public void addAluno(Aluno aluno) {
+        alunos.add(aluno);
+    }
 
-            switch (operacao) {
-                case 1:
-                    // String nome = JOptionPane.showInputDialog("Insira o nome:");
-                    // String email = JOptionPane.showInputDialog("Insira o email:");
-                    // String cpf = JOptionPane.showInputDialog("Insira o cpf:");
-                    // String nMatricula = JOptionPane.showInputDialog("Insira o n° da matrícula:");
-                    alunos.add(aluno);
-                    break;
-
-                case 2:
-                    professores.add(professor);
-                    break;
-
-                case 3:
-                    System.out.println("Saindo");
-                    break;
-
-                default:
-                    System.out.println("Insira algo válido");
-                    break;
-            }
-        } while (operacao != 3);
+    public void addProfessor(Professor professor) {
+        professores.add(professor);
     }
 
     public void listarPessoa() {
@@ -56,11 +28,76 @@ public class PessoaController {
         do {
             try {
                 operacao = Integer.parseInt(JOptionPane.showInputDialog(
-                        "\n" + "1. Listar Aluno \n" + "2. Listar Professor \n" + "3. Sair"));
+                        "\n" + "1. Listar Alunos \n" + "2. Listar Professores \n" + "3. Sair"));
+
+                switch (operacao) {
+                    case 1:
+                        if (alunos.size() == 0) {
+                            System.out.println("Lista Vazia");
+                        } else {
+                            for (Aluno aluno : alunos) {
+                                System.out.println(aluno.exibirInformacoes());
+                            }
+                        }
+
+                        break;
+
+                    case 2:
+                        if (professores.size() == 0) {
+                            System.out.println("Lista Vazia");
+                        } else {
+                            for (Professor professor : professores) {
+                                System.out.println(professor.exibirInformacoes());
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Saindo");
+                        break;
+
+                    default:
+                        System.out.println("Insira algo válido");
+                        break;
+                }
             } catch (Exception e) {
                 System.err.println(e);
                 operacao = 0;
             }
-        } while (operacao!=3);
+        } while (operacao != 3);
+    }
+
+    public void removerAluno(String nome) {
+        try {
+            boolean encontrado = false;
+        for (Aluno aluno : alunos) {
+            if (aluno.getNome().equalsIgnoreCase(nome)) {
+                alunos.remove(aluno);
+                encontrado = true;
+            }
+        }
+        if(!encontrado) {
+            throw new Exception("Aluno não encontrado");
+        }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public void removerProfessor(String nome) {
+        try {
+            boolean encontrado = false;
+        for (Professor professor : professores) {
+            if (professor.getNome().equalsIgnoreCase(nome)) {
+                professores.remove(professor);
+                encontrado = true;
+            }
+        }
+        if(!encontrado) {
+            throw new Exception("Professor não encontrado");
+        }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }

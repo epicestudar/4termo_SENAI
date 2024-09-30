@@ -19,7 +19,6 @@ public class Professor extends Pessoa{
 
    @Override
    public String exibirInformacoes() {
-    super.exibirInformacoes();
-    return "Salário: " + salario;
+    return super.exibirInformacoes() + "Salário: " + salario;
    }
 }

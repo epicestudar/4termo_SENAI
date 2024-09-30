@@ -1,11 +1,15 @@
 package br.com.epicestudar.Model;
 
 import br.com.epicestudar.Interface.Avaliavel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Aluno extends Pessoa implements Avaliavel{
     private String nMatricula;
     private double nota;
@@ -19,8 +23,7 @@ public class Aluno extends Pessoa implements Avaliavel{
     // polimorfismo -- sobreescrever o método
     @Override
     public String exibirInformacoes() {
-        super.exibirInformacoes();
-        return "Matrícula: " + nMatricula + ", Nota: " + nota;
+        return super.exibirInformacoes() + ", Matrícula: " + nMatricula + ", Nota: " + nota;
     }
 
     @Override

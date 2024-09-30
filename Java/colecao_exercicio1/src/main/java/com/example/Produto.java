@@ -1,4 +1,4 @@
-package br.com.epicestudar;
+package com.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Pessoa {
+public class Produto {
     private String nome;
-    private String cpf;
+    private double preco;
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", preço: " + preco;
+    }
 }

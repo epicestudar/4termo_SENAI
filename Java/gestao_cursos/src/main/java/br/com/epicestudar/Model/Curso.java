@@ -2,6 +2,15 @@ package br.com.epicestudar.Model;
 
 import java.util.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Curso {
     private String nomeCurso;
     private List<Aluno> alunos;
