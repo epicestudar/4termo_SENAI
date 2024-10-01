@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState([]);
@@ -10,33 +12,29 @@ export default function TodoPage() {
   const [newStatus, setNewStatus] = useState("Pendente");
   const router = useRouter();
 
-  // Fetch todos ao carregar a página
   useEffect(() => {
     const fetchTodos = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        router.push("/login"); // Redireciona para login se o usuário não estiver autenticado
+        router.push("/login");
         return;
       }
 
       const response = await fetch("/api/todos", {
-        headers: {
-          Authorization: `Bearer ${token}`, // Envia o token no header da requisição
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.ok) {
         const data = await response.json();
         setTodos(data.todos);
       } else {
-        router.push("/login"); // Redireciona para login se houver erro
+        router.push("/login");
       }
     };
 
     fetchTodos();
   }, [router]);
 
-  // Adiciona nova tarefa
   const addTodo = async () => {
     const token = localStorage.getItem("token");
     const response = await fetch("/api/todos", {
@@ -56,17 +54,14 @@ export default function TodoPage() {
     setTodos([...todos, data.todo]);
     setNewTitulo("");
     setNewDescricao("");
-    setNewStatus("Pendente"); // Reseta o status para Pendente
+    setNewStatus("Pendente");
   };
 
-  // Deleta uma tarefa
   const deleteTodo = async (id) => {
     const token = localStorage.getItem("token");
     await fetch(`/api/todos?id=${id}`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     setTodos(todos.filter((todo) => todo._id !== id));
@@ -74,8 +69,8 @@ export default function TodoPage() {
 
   return (
     <div>
+      <Header />
       <h1>To-Do List</h1>
-      {/* Formulário para adicionar nova tarefa */}
       <input
         type="text"
         value={newTitulo}
@@ -90,20 +85,62 @@ export default function TodoPage() {
       />
       <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
         <option value="Pendente">Pendente</option>
-        <option value="Em progresso">Em progresso</option>
         <option value="Concluído">Concluído</option>
       </select>
       <button onClick={addTodo}>Adicionar Tarefa</button>
 
-      {/* Lista de tarefas */}
       <ul>
         {todos.map((todo) => (
           <li key={todo._id}>
-            <strong>{todo.titulo}</strong> - {todo.descricao} [{todo.status}]
-            <button onClick={() => deleteTodo(todo._id)}>Excluir</button>
+            <h3>{todo.titulo}</h3>
+            <p>{todo.descricao}</p>
+            <button onClick={() => deleteTodo(todo._id)}>Deletar</button>
           </li>
         ))}
       </ul>
+      <Footer />
+      <style jsx>{`
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100vh;
+        }
+        h1 {
+          text-align: center;
+          margin: 20px 0;
+        }
+        input,
+        select {
+          margin: 10px;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+        }
+        button {
+          margin: 10px;
+          padding: 10px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #555;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+        li {
+          background-color: #f7f7f7;
+          padding: 15px;
+          margin: 10px;
+          border-radius: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
     </div>
   );
 }
